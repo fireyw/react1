@@ -100,6 +100,34 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
             value={form.passwordConfirm}
           />
         )}
+        <StyledInput
+          autoComplete="nickname"
+          name="nickname"
+          placeholder="이름"
+          onChange={onChange}
+          value={form.nickname}
+        />        
+        <StyledInput
+          autoComplete="birth"
+          name="birth"
+          placeholder="생년월일"
+          onChange={onChange}
+          value={form.birth}
+        />
+        <StyledInput
+          autoComplete="sex"
+          name="sex"
+          placeholder="성별"
+          onChange={onChange}
+          value={form.sex}
+        />           
+        <StyledInput
+          autoComplete="phone"
+          name="phone"
+          placeholder="전화번호"
+          onChange={onChange}
+          value={form.phone}
+        />                   
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <ButtonWithMarginTop cyan fullWidth style={{ marginTop: '1rem' }}>
           {text}
