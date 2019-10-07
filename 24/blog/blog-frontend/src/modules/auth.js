@@ -17,6 +17,10 @@ const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
   'auth/LOGIN'
 );
 
+const [USERLIST] = createRequestActionTypes(
+  'auth/USERLIST'
+);
+
 export const changeField = createAction(
   CHANGE_FIELD,
   ({ form, key, value }) => ({
@@ -35,6 +39,11 @@ export const register = createAction(REGISTER, ({ username, password, nickname, 
   phone,
 }));
 export const login = createAction(LOGIN, ({ username, password }) => ({
+  username,
+  password
+}));
+
+export const userList = createAction(USERLIST, ({ username, password }) => ({
   username,
   password
 }));

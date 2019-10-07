@@ -132,6 +132,9 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
         <ButtonWithMarginTop cyan fullWidth style={{ marginTop: '1rem' }}>
           {text}
         </ButtonWithMarginTop>
+        <button>
+           {text}
+        </button>
       </form>
       <Footer>
         {type === 'login' ? (

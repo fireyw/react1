@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { changeField, initializeForm, login } from '../../modules/auth';
+import { changeField, initializeForm, login, userList } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
 import { check } from '../../modules/user';
 
@@ -30,7 +30,9 @@ const LoginForm = ({ history }) => {
   const onSubmit = e => {
     e.preventDefault();
     const { username, password } = form;
-    dispatch(login({ username, password }));
+    //dispatch(login({ username, password }));
+    console.log("LoginForm userList call")
+    dispatch(userList(username, password ));
   };
 
   // 컴포넌트가 처음 렌더링 될 때 form 을 초기화함

@@ -17,6 +17,10 @@ export const register = async ctx => {
       .max(20)
       .required(),
     password: Joi.string().required(),
+    nickname: Joi.string(),
+    birth: Joi.number(),
+    sex: Joi.string(),
+    phone: Joi.number(),
   });
   const result = Joi.validate(ctx.request.body, schema);
   if (result.error) {
@@ -25,7 +29,7 @@ export const register = async ctx => {
     return;
   }
 
-  const { username, password } = ctx.request.body;
+  const { username, password, nickname, birth, sex, phone} = ctx.request.body;
   try {
     // username  이 이미 존재하는지 확인
     const exists = await User.findByUsername(username);
@@ -33,10 +37,15 @@ export const register = async ctx => {
       ctx.status = 409; // Conflict
       return;
     }
-
+    console.log('auth.ctrl.js ctx : %o', ctx.request.body);
     const user = new User({
       username,
+      nickname,
+      birth,
+      sex,
+      phone,
     });
+    
     await user.setPassword(password); // 비밀번호 설정
     await user.save(); // 데이터베이스에 저장
 
@@ -60,6 +69,7 @@ export const register = async ctx => {
   }
 */
 export const login = async ctx => {
+  console.log("backend auth.ctrl.js login call");
   const { username, password } = ctx.request.body;
 
   // username, password 가 없으면 에러 처리
@@ -112,3 +122,16 @@ export const logout = async ctx => {
   ctx.cookies.set('access_token');
   ctx.status = 204; // No Content
 };
+
+/*
+  POST /api/auth/userList
+*/
+export const userList = async ctx=>{
+  try {
+      console.log("backend auth.ctrl.js userList call");
+      const userList = await User.find().exec();
+      ctx.body=userList;
+  }catch(e){
+    ctx.throw(500,e);
+  }
+}
